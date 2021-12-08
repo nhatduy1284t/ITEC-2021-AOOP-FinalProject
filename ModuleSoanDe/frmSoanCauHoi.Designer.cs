@@ -39,18 +39,18 @@ namespace ModuleSoanDe
             this.cbx_DapAnDung = new System.Windows.Forms.ComboBox();
             this.cbx_QuestionField = new System.Windows.Forms.ComboBox();
             this.btn_TaoCauHoi = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lbl_DapAn4 = new System.Windows.Forms.Label();
+            this.lbl_DapAn3 = new System.Windows.Forms.Label();
+            this.lbl_DapAn2 = new System.Windows.Forms.Label();
+            this.lbl_DapAn1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_QuayLai = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnThemDapAn = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btn_ThemDapAn = new System.Windows.Forms.Button();
+            this.btn_BotDapAn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -77,7 +77,8 @@ namespace ModuleSoanDe
             // 
             // txt_DapAn4
             // 
-            this.txt_DapAn4.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txt_DapAn4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_DapAn4.Location = new System.Drawing.Point(12, 343);
             this.txt_DapAn4.Name = "txt_DapAn4";
             this.txt_DapAn4.Size = new System.Drawing.Size(475, 27);
@@ -85,7 +86,8 @@ namespace ModuleSoanDe
             // 
             // txt_DapAn2
             // 
-            this.txt_DapAn2.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txt_DapAn2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_DapAn2.Location = new System.Drawing.Point(12, 237);
             this.txt_DapAn2.Name = "txt_DapAn2";
             this.txt_DapAn2.Size = new System.Drawing.Size(475, 27);
@@ -93,7 +95,8 @@ namespace ModuleSoanDe
             // 
             // txt_DapAn3
             // 
-            this.txt_DapAn3.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txt_DapAn3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_DapAn3.Location = new System.Drawing.Point(12, 290);
             this.txt_DapAn3.Name = "txt_DapAn3";
             this.txt_DapAn3.Size = new System.Drawing.Size(475, 27);
@@ -101,7 +104,8 @@ namespace ModuleSoanDe
             // 
             // txt_DapAn1
             // 
-            this.txt_DapAn1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txt_DapAn1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_DapAn1.Location = new System.Drawing.Point(12, 184);
             this.txt_DapAn1.Name = "txt_DapAn1";
             this.txt_DapAn1.Size = new System.Drawing.Size(475, 27);
@@ -109,7 +113,8 @@ namespace ModuleSoanDe
             // 
             // txt_NoiDungCauHoi
             // 
-            this.txt_NoiDungCauHoi.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txt_NoiDungCauHoi.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_NoiDungCauHoi.Location = new System.Drawing.Point(12, 105);
             this.txt_NoiDungCauHoi.Name = "txt_NoiDungCauHoi";
             this.txt_NoiDungCauHoi.Size = new System.Drawing.Size(475, 27);
@@ -139,7 +144,7 @@ namespace ModuleSoanDe
             // 
             this.btn_TaoCauHoi.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btn_TaoCauHoi.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btn_TaoCauHoi.Location = new System.Drawing.Point(12, 154);
+            this.btn_TaoCauHoi.Location = new System.Drawing.Point(12, 173);
             this.btn_TaoCauHoi.Name = "btn_TaoCauHoi";
             this.btn_TaoCauHoi.Size = new System.Drawing.Size(475, 45);
             this.btn_TaoCauHoi.TabIndex = 43;
@@ -147,51 +152,56 @@ namespace ModuleSoanDe
             this.btn_TaoCauHoi.UseVisualStyleBackColor = true;
             this.btn_TaoCauHoi.Click += new System.EventHandler(this.btn_TaoCauHoi_Click);
             // 
-            // label6
+            // lbl_DapAn4
             // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label6.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label6.Location = new System.Drawing.Point(12, 320);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(100, 23);
-            this.label6.TabIndex = 35;
-            this.label6.Text = "Đáp án 4";
+            this.lbl_DapAn4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_DapAn4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lbl_DapAn4.Location = new System.Drawing.Point(12, 320);
+            this.lbl_DapAn4.Name = "lbl_DapAn4";
+            this.lbl_DapAn4.Size = new System.Drawing.Size(100, 23);
+            this.lbl_DapAn4.TabIndex = 35;
+            this.lbl_DapAn4.Text = "Đáp án 4";
             // 
-            // label5
+            // lbl_DapAn3
             // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label5.Location = new System.Drawing.Point(12, 267);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(100, 23);
-            this.label5.TabIndex = 36;
-            this.label5.Text = "Đáp án 3";
+            this.lbl_DapAn3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_DapAn3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lbl_DapAn3.Location = new System.Drawing.Point(12, 267);
+            this.lbl_DapAn3.Name = "lbl_DapAn3";
+            this.lbl_DapAn3.Size = new System.Drawing.Size(100, 23);
+            this.lbl_DapAn3.TabIndex = 36;
+            this.lbl_DapAn3.Text = "Đáp án 3";
             // 
-            // label9
+            // lbl_DapAn2
             // 
-            this.label9.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label9.AutoSize = true;
-            this.label9.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label9.Location = new System.Drawing.Point(12, 214);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(69, 20);
-            this.label9.TabIndex = 37;
-            this.label9.Text = "Đáp án 2";
+            this.lbl_DapAn2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_DapAn2.AutoSize = true;
+            this.lbl_DapAn2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lbl_DapAn2.Location = new System.Drawing.Point(12, 214);
+            this.lbl_DapAn2.Name = "lbl_DapAn2";
+            this.lbl_DapAn2.Size = new System.Drawing.Size(69, 20);
+            this.lbl_DapAn2.TabIndex = 37;
+            this.lbl_DapAn2.Text = "Đáp án 2";
             // 
-            // label2
+            // lbl_DapAn1
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label2.AutoSize = true;
-            this.label2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label2.Location = new System.Drawing.Point(12, 161);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(69, 20);
-            this.label2.TabIndex = 33;
-            this.label2.Text = "Đáp án 1";
+            this.lbl_DapAn1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_DapAn1.AutoSize = true;
+            this.lbl_DapAn1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lbl_DapAn1.Location = new System.Drawing.Point(12, 161);
+            this.lbl_DapAn1.Name = "lbl_DapAn1";
+            this.lbl_DapAn1.Size = new System.Drawing.Size(69, 20);
+            this.lbl_DapAn1.TabIndex = 33;
+            this.lbl_DapAn1.Text = "Đáp án 1";
             // 
             // label3
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.label3.Location = new System.Drawing.Point(12, 72);
@@ -246,6 +256,8 @@ namespace ModuleSoanDe
             // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.btn_ChonFile);
@@ -253,36 +265,40 @@ namespace ModuleSoanDe
             this.panel1.Controls.Add(this.lbl_FileName);
             this.panel1.Controls.Add(this.cbx_QuestionField);
             this.panel1.Controls.Add(this.cbx_DapAnDung);
-            this.panel1.Location = new System.Drawing.Point(0, 407);
+            this.panel1.Location = new System.Drawing.Point(1, 517);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(501, 216);
+            this.panel1.Size = new System.Drawing.Size(501, 237);
             this.panel1.TabIndex = 45;
             // 
-            // btnThemDapAn
+            // btn_ThemDapAn
             // 
-            this.btnThemDapAn.Location = new System.Drawing.Point(427, 376);
-            this.btnThemDapAn.Name = "btnThemDapAn";
-            this.btnThemDapAn.Size = new System.Drawing.Size(59, 29);
-            this.btnThemDapAn.TabIndex = 46;
-            this.btnThemDapAn.Text = "button1";
-            this.btnThemDapAn.UseVisualStyleBackColor = true;
+            this.btn_ThemDapAn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_ThemDapAn.Location = new System.Drawing.Point(443, 376);
+            this.btn_ThemDapAn.Name = "btn_ThemDapAn";
+            this.btn_ThemDapAn.Size = new System.Drawing.Size(43, 29);
+            this.btn_ThemDapAn.TabIndex = 46;
+            this.btn_ThemDapAn.Text = "+";
+            this.btn_ThemDapAn.UseVisualStyleBackColor = true;
+            this.btn_ThemDapAn.Click += new System.EventHandler(this.btn_ThemDapAn_Click);
             // 
-            // button2
+            // btn_BotDapAn
             // 
-            this.button2.Location = new System.Drawing.Point(340, 376);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(65, 29);
-            this.button2.TabIndex = 47;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btn_BotDapAn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_BotDapAn.Location = new System.Drawing.Point(391, 376);
+            this.btn_BotDapAn.Name = "btn_BotDapAn";
+            this.btn_BotDapAn.Size = new System.Drawing.Size(46, 29);
+            this.btn_BotDapAn.TabIndex = 47;
+            this.btn_BotDapAn.Text = "-";
+            this.btn_BotDapAn.UseVisualStyleBackColor = true;
+            this.btn_BotDapAn.Click += new System.EventHandler(this.btn_BotDapAn_Click);
             // 
             // frmSoanCauHoi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(498, 798);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.btnThemDapAn);
+            this.ClientSize = new System.Drawing.Size(498, 747);
+            this.Controls.Add(this.btn_BotDapAn);
+            this.Controls.Add(this.btn_ThemDapAn);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btn_QuayLai);
             this.Controls.Add(this.txt_DapAn4);
@@ -290,10 +306,10 @@ namespace ModuleSoanDe
             this.Controls.Add(this.txt_DapAn3);
             this.Controls.Add(this.txt_DapAn1);
             this.Controls.Add(this.txt_NoiDungCauHoi);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lbl_DapAn4);
+            this.Controls.Add(this.lbl_DapAn3);
+            this.Controls.Add(this.lbl_DapAn2);
+            this.Controls.Add(this.lbl_DapAn1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Name = "frmSoanCauHoi";
@@ -317,17 +333,17 @@ namespace ModuleSoanDe
         private System.Windows.Forms.ComboBox cbx_DapAnDung;
         private System.Windows.Forms.ComboBox cbx_QuestionField;
         private System.Windows.Forms.Button btn_TaoCauHoi;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbl_DapAn4;
+        private System.Windows.Forms.Label lbl_DapAn3;
+        private System.Windows.Forms.Label lbl_DapAn2;
+        private System.Windows.Forms.Label lbl_DapAn1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btn_QuayLai;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnThemDapAn;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btn_ThemDapAn;
+        private System.Windows.Forms.Button btn_BotDapAn;
     }
 }

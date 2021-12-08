@@ -30,8 +30,65 @@ namespace ModuleSoanDe
         {
             this.Dock = DockStyle.Fill;
         }
+        private bool CheckListTest()
+        {
+            if (lstTest.Count == 0)
+            {
+                MessageBox.Show("Hãy chọn ít nhất 1 bài để chấm !");
+                return false;
+            }
+            return true;
+        }
+        private bool CheckValidSubmittedFileTest(string filePath)
+        {
+            if (filePath == null)
+            {
+                MessageBox.Show("Chưa chọn file đề thi!");
+                return false;
+            }
+
+            if (Path.GetExtension(filePath) != ".xml")
+            {
+                MessageBox.Show("File không hợp lệ");
+                return false;
+            }
+
+            using (XmlReader xml = XmlReader.Create(filePath))
+            {
+                if (xml.ReadToFollowing("test"))
+                    if (xml.MoveToAttribute("type"))
+                        if (xml.Value == "submittedTest")
+                            return true;
+                MessageBox.Show("File không đúng định dạng");
+                return false;
+            }
+        }
+
+        private bool CheckValidFileHistory(string filePath)
+        {
+            if (filePath == null)
+            {
+                MessageBox.Show("Chưa chọn file đáp án!");
+                return false;
+            }
+
+            if (Path.GetExtension(filePath) != ".xml")
+            {
+                MessageBox.Show("File không hợp lệ");
+                return false;
+            }
+
+            using (XmlReader xml = XmlReader.Create(filePath))
+            {
+                if (xml.ReadToFollowing("history"))
+                    return true;
+                MessageBox.Show("File không đúng định dạng");
+                return false;
+            }
+        }
         private void LoadListQuestions()
         {
+            lstQuestions.Clear();
             using (XmlReader xml = XmlReader.Create(historyFilePath))
             {
                 xml.ReadToFollowing("history");
@@ -64,6 +121,7 @@ namespace ModuleSoanDe
         private void LoadListTest(string xmlFilePath)
         {
             //Load file bài làm và đưa vào list test
+            lstTest.Clear();
             using (XmlReader xml = XmlReader.Create(xmlFilePath))
             {
                 Test t = new Test();
@@ -100,7 +158,8 @@ namespace ModuleSoanDe
                             if (qs.lstQuestion[i].TrueAnswer == t.lstAnswer[i])
                                 t.NumberOfTrueAnswer++;
                         }
-                        t.Score = (t.NumberOfTrueAnswer * 10) / t.lstAnswer.Count;
+                        
+                        t.Score = (float)(t.NumberOfTrueAnswer * 10) / t.lstAnswer.Count;
                     }
                 }
             }
@@ -116,31 +175,33 @@ namespace ModuleSoanDe
             {
                 foreach (string file in dlg.FileNames)
                 {
-                    LoadListTest(file);
+                    if (!CheckValidSubmittedFileTest(file))
+                        return;
+                    if (lbx_Test.Items.Contains(Path.GetFileName(file)))
+                    {
+                        MessageBox.Show($"File {Path.GetFileName(file)} đã được chọn");
+                        return;
+                    }
+                    LoadListTest(file);                   
                     lbx_Test.Items.Add(Path.GetFileName(file));
                 }
             }
         }
 
-
+        
         private void btn_ChamBai_Click(object sender, EventArgs e)
         {
-            if (historyFilePath == null)
-            {
-                MessageBox.Show("Hãy chọn file đáp án");
+            if (!CheckValidFileHistory(historyFilePath))
                 return;
-            }
-            if (lstTest.Count == 0)
-            {
-                MessageBox.Show("Hãy chọn ít nhất 1 bài để chấm !");
+            if (!CheckListTest())
                 return;
-            }
 
             MarkTest();
             lstTest.Sort(new DateDescendingComparer());
             lstTest.Sort(new ScoreDescendingComparer());
             using (var sw = new StreamWriter("result.txt"))
             {
+                
                 string date = "";
                 foreach (var t in lstTest)
                 {
@@ -148,10 +209,13 @@ namespace ModuleSoanDe
                     {
                         date = t.Date;
                         sw.WriteLine($"{date}");
-                    }
-                    sw.WriteLine($"{t.Code} - {t.Id} - {t.Name} - {t.Score}");
+                    }                 
+                    sw.WriteLine($"{t.Code} - {t.Id} - {t.Name} - {Math.Round((Double)t.Score,1)}");
                 }
             }
+            MessageBox.Show("Bài làm được chấm thành công và lưu tại file result.txt tại thư mục chương trình!");
+            lbx_Test.Items.Clear();
+            lstTest.Clear();
         }
 
         private void btn_ChonFileDapAn_Click(object sender, EventArgs e)
@@ -163,14 +227,12 @@ namespace ModuleSoanDe
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 historyFilePath = dlg.FileName;
-                lbl_FileDapAn.Text = Path.GetFileName(historyFilePath);
+                if (!CheckValidFileHistory(historyFilePath))
+                    return;
+
+                lbl_ChonFileDapAn.Text = Path.GetFileName(historyFilePath);             
                 LoadListQuestions();//Load đáp án đề thi
             }
-        }
-
-        private void btn_QuayLai_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 }

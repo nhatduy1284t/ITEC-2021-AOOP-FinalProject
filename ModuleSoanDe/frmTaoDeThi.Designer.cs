@@ -42,6 +42,8 @@ namespace ModuleSoanDe
             this.btn_TaoDeThi = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_QuayLai = new System.Windows.Forms.Button();
+            this.btn_ChonFileLichSu = new System.Windows.Forms.Button();
+            this.lbl_FileLichSu = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.txt_SoLuongCauHoi)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,19 +51,20 @@ namespace ModuleSoanDe
             // 
             this.lbl_ChonFile.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lbl_ChonFile.AutoSize = true;
-            this.lbl_ChonFile.Location = new System.Drawing.Point(121, 185);
+            this.lbl_ChonFile.Location = new System.Drawing.Point(147, 207);
             this.lbl_ChonFile.Name = "lbl_ChonFile";
-            this.lbl_ChonFile.Size = new System.Drawing.Size(0, 20);
+            this.lbl_ChonFile.Size = new System.Drawing.Size(37, 20);
             this.lbl_ChonFile.TabIndex = 21;
+            this.lbl_ChonFile.Text = "       ";
             // 
             // btn_ChonFile
             // 
             this.btn_ChonFile.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btn_ChonFile.Location = new System.Drawing.Point(12, 181);
+            this.btn_ChonFile.Location = new System.Drawing.Point(12, 203);
             this.btn_ChonFile.Name = "btn_ChonFile";
-            this.btn_ChonFile.Size = new System.Drawing.Size(92, 29);
+            this.btn_ChonFile.Size = new System.Drawing.Size(131, 29);
             this.btn_ChonFile.TabIndex = 20;
-            this.btn_ChonFile.Text = "Chọn file";
+            this.btn_ChonFile.Text = "Chọn file câu hỏi";
             this.btn_ChonFile.UseVisualStyleBackColor = true;
             this.btn_ChonFile.Click += new System.EventHandler(this.btn_ChonFile_Click);
             // 
@@ -81,9 +84,9 @@ namespace ModuleSoanDe
             this.clbx_CauHoi.CheckOnClick = true;
             this.clbx_CauHoi.FormattingEnabled = true;
             this.clbx_CauHoi.HorizontalScrollbar = true;
-            this.clbx_CauHoi.Location = new System.Drawing.Point(12, 216);
+            this.clbx_CauHoi.Location = new System.Drawing.Point(12, 238);
             this.clbx_CauHoi.Name = "clbx_CauHoi";
-            this.clbx_CauHoi.Size = new System.Drawing.Size(525, 312);
+            this.clbx_CauHoi.Size = new System.Drawing.Size(525, 290);
             this.clbx_CauHoi.TabIndex = 18;
             this.clbx_CauHoi.Visible = false;
             this.clbx_CauHoi.SelectedIndexChanged += new System.EventHandler(this.clbx_CauHoi_SelectedIndexChanged);
@@ -180,13 +183,36 @@ namespace ModuleSoanDe
             this.btn_QuayLai.UseVisualStyleBackColor = true;
             this.btn_QuayLai.Click += new System.EventHandler(this.btn_QuayLai_Click);
             // 
+            // btn_ChonFileLichSu
+            // 
+            this.btn_ChonFileLichSu.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btn_ChonFileLichSu.Location = new System.Drawing.Point(12, 168);
+            this.btn_ChonFileLichSu.Name = "btn_ChonFileLichSu";
+            this.btn_ChonFileLichSu.Size = new System.Drawing.Size(131, 29);
+            this.btn_ChonFileLichSu.TabIndex = 20;
+            this.btn_ChonFileLichSu.Text = "Chọn file lịch sử";
+            this.btn_ChonFileLichSu.UseVisualStyleBackColor = true;
+            this.btn_ChonFileLichSu.Click += new System.EventHandler(this.btn_ChonFileLichSu_Click);
+            // 
+            // lbl_FileLichSu
+            // 
+            this.lbl_FileLichSu.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lbl_FileLichSu.AutoSize = true;
+            this.lbl_FileLichSu.Location = new System.Drawing.Point(147, 172);
+            this.lbl_FileLichSu.Name = "lbl_FileLichSu";
+            this.lbl_FileLichSu.Size = new System.Drawing.Size(209, 20);
+            this.lbl_FileLichSu.TabIndex = 21;
+            this.lbl_FileLichSu.Text = "(Mặc định tạo file History.xml)";
+            // 
             // frmTaoDeThi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(548, 604);
             this.Controls.Add(this.btn_QuayLai);
+            this.Controls.Add(this.lbl_FileLichSu);
             this.Controls.Add(this.lbl_ChonFile);
+            this.Controls.Add(this.btn_ChonFileLichSu);
             this.Controls.Add(this.btn_ChonFile);
             this.Controls.Add(this.txt_MaDe);
             this.Controls.Add(this.clbx_CauHoi);
@@ -221,5 +247,7 @@ namespace ModuleSoanDe
         private System.Windows.Forms.Button btn_TaoDeThi;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btn_QuayLai;
+        private System.Windows.Forms.Button btn_ChonFileLichSu;
+        private System.Windows.Forms.Label lbl_FileLichSu;
     }
 }

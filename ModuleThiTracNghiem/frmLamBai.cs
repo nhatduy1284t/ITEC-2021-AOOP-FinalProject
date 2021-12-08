@@ -135,6 +135,7 @@ namespace ModuleThiTracNghiem
                 xml.WriteStartElement("test");
                 xml.WriteAttributeString("code", maDe);
                 xml.WriteAttributeString("date", date);
+                xml.WriteAttributeString("type", "submittedTest");
                 xml.WriteStartElement("employeeinfo");
                 xml.WriteStartElement("name");
                 xml.WriteValue(name);

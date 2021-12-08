@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace ModuleThiTracNghiem
 {
@@ -76,10 +77,34 @@ namespace ModuleThiTracNghiem
             }
             return true;
         }
+        private bool CheckValidFile(string filePath)
+        {
+            if (xmlFilePath == null)
+            {
+                MessageBox.Show("Chưa chọn file đề thi!");
+                return false;
+            }
+            
+            if (Path.GetExtension(filePath)!=".xml")
+            {
+                MessageBox.Show("File không hợp lệ");
+                return false;
+            }
+            using (XmlReader xml = XmlReader.Create(filePath))
+            {
+                if (xml.ReadToFollowing("questions"))
+                    if(xml.MoveToAttribute("type"))
+                        if (xml.Value == "questions")
+                            return true;    
+                MessageBox.Show("File không đúng định dạng");
+                return false;
+            }
+            
+        }
         private void btn_BatDau_Click(object sender, EventArgs e)
         {
             
-            if (CheckFillInfo() && CheckSelectedFile())
+            if (CheckFillInfo() && CheckValidFile(xmlFilePath))
                 DisplayPage(Page.LAM_BAI);         
         }
 

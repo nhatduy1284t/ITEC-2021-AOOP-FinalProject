@@ -42,7 +42,7 @@ namespace ModuleSoanDe.Class
         public string Date;
         public string Code;
         public int NumberOfTrueAnswer=0;
-        public int Score;
+        public float Score;
 
         
     }

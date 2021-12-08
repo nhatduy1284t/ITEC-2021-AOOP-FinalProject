@@ -18,7 +18,9 @@ namespace ModuleSoanDe
         List<Question> lstCauHoi = new List<Question>();
         List<int> lstViTriCauHoiTuChon = new List<int>();
         List<int> lstViTriCauHoiRandom = new List<int>();
+        string historyFilePath="History.xml";
         string xmlQuestionFilePath;
+ 
         public frmTaoDeThi()
         {
             InitializeComponent();
@@ -35,6 +37,7 @@ namespace ModuleSoanDe
         }
         private void LoadQuestionFromFileToList(string filePath)
         {
+            
             try
             {
                 lstCauHoi.Clear();
@@ -66,6 +69,7 @@ namespace ModuleSoanDe
                 MessageBox.Show("Không đúng định dạng file");
                 return;
             }
+            
 
         }
         private void DisplayViewOptionNgauNhien()
@@ -108,7 +112,15 @@ namespace ModuleSoanDe
 
         private void clbx_CauHoi_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            int index = clbx_CauHoi.SelectedIndex;
+            if(lstViTriCauHoiTuChon.Contains(index))
+            {
+                lstViTriCauHoiTuChon.Remove(index);
+            }
+            else
+            {
+                lstViTriCauHoiTuChon.Add(index);
+            }
         }
         private List<int> CreateRandomDistinctIndexList(int maxValue, int amount)
         {
@@ -130,13 +142,14 @@ namespace ModuleSoanDe
             return lstIndex;
         }
         private bool WriteFileHistory()
-        {
-            string historyFileName = "history.xml";
+        {          
             int soLuongCauHoi = int.Parse(txt_SoLuongCauHoi.Value.ToString());
-            if (File.Exists(historyFileName))
+            if (File.Exists(historyFilePath))
             {
-                XDocument doc = XDocument.Load(historyFileName);
-                using (XmlReader xmlReader = XmlReader.Create(historyFileName))
+                XDocument doc = XDocument.Load(historyFilePath);
+
+                //Check tồn tại mã đề trong history không
+                using (XmlReader xmlReader = XmlReader.Create(historyFilePath))
                     while (xmlReader.ReadToFollowing("questions"))
                     {
                         xmlReader.MoveToAttribute("code");
@@ -158,28 +171,37 @@ namespace ModuleSoanDe
                                 return false;
                         }
                     }
-
+                //Chèn vào xml file
                 XElement questions = new XElement("questions",
                     new XAttribute("date", DateTime.Now.ToString("dd/MM/yyyy")),
                     new XAttribute("code", txt_MaDe.Text),
                     new XAttribute("questionCount", soLuongCauHoi));
-
-
-
-                List<int> lstIndexRandom = CreateRandomDistinctIndexList(lstCauHoi.Count, soLuongCauHoi);
-
-                lstViTriCauHoiRandom = lstIndexRandom;
-                foreach (var randomIndex in lstViTriCauHoiRandom)
+                
+                if (cbx_LuaChon.SelectedItem.ToString() == "Ngẫu nhiên")
                 {
-                    questions.Add(new XElement("question"),
-                        new XElement("content", lstCauHoi[randomIndex].Content),
-                        new XElement("trueanswer", lstCauHoi[randomIndex].TrueAnswer));
+                    List<int> lstIndexRandom = CreateRandomDistinctIndexList(lstCauHoi.Count, soLuongCauHoi);
+                    lstViTriCauHoiRandom = lstIndexRandom;
+                    foreach (var randomIndex in lstViTriCauHoiRandom)
+                    {
+                        questions.Add(new XElement("question",
+                            new XElement("content", lstCauHoi[randomIndex].Content),
+                            new XElement("trueanswer", lstCauHoi[randomIndex].TrueAnswer)));
+                    }
+                }
+                else
+                {                
+                    foreach (var index in lstViTriCauHoiTuChon)
+                    {
+                        questions.Add(new XElement("question",
+                            new XElement("content", lstCauHoi[index].Content),
+                            new XElement("trueanswer", lstCauHoi[index].TrueAnswer)));
+                    }
                 }
                 doc.Root.Add(questions);
-                doc.Save(historyFileName, SaveOptions.None);
+                doc.Save(historyFilePath, SaveOptions.None);
             }
             else
-                using (XmlWriter xml = XmlWriter.Create(historyFileName, new XmlWriterSettings() { Indent = true }))
+                using (XmlWriter xml = XmlWriter.Create(historyFilePath, new XmlWriterSettings() { Indent = true }))
                 {
                     xml.WriteStartElement("history");
                     xml.WriteStartElement("questions");
@@ -200,7 +222,6 @@ namespace ModuleSoanDe
                         xml.WriteEndElement();
                         xml.WriteEndElement();
                     }
-
                     xml.WriteEndElement();
                     xml.WriteEndElement();
                 }
@@ -208,7 +229,6 @@ namespace ModuleSoanDe
         }
         private void WriteFileTest()
         {
-
             string maDe = txt_MaDe.Text;
             if (!Directory.Exists("questions"))
                 Directory.CreateDirectory("questions");
@@ -219,6 +239,7 @@ namespace ModuleSoanDe
                 xml.WriteStartElement("questions");
                 xml.WriteAttributeString("date", DateTime.Now.ToString("dd/MM/yyyy"));
                 xml.WriteAttributeString("code", maDe);
+                xml.WriteAttributeString("type", "questions");
                 if (luaChon == "Ngẫu nhiên")
                 {
                     for (int i = 0; i < lstViTriCauHoiRandom.Count; i++)
@@ -270,12 +291,17 @@ namespace ModuleSoanDe
         }
         private bool CheckValidForm()
         {
+            if(xmlQuestionFilePath==null)
+            {
+                MessageBox.Show("Chưa chọn file ngân hàng câu hỏi");
+                return false;
+            }
             if (txt_MaDe.Text == "")
             {
                 MessageBox.Show("Vui lòng điền mã đề");
                 return false;
             }
-            if (txt_SoLuongCauHoi.Value == 0)
+            if ((lstViTriCauHoiTuChon.Count <= 0 && cbx_LuaChon.SelectedItem.ToString() == "Tự chọn") || (txt_SoLuongCauHoi.Value == 0 && cbx_LuaChon.SelectedItem.ToString() == "Ngẫu nhiên"))
             {
                 MessageBox.Show("Số lượng tối thiểu là 1 câu");
                 return false;
@@ -291,6 +317,7 @@ namespace ModuleSoanDe
             if (WriteFileHistory())
             {
                 WriteFileTest();
+                MessageBox.Show("Tạo đề thi thành công !");
             }
         }
 
@@ -307,8 +334,17 @@ namespace ModuleSoanDe
                 SetMaximumValueNumberBox(lstCauHoi.Count);
             }
         }
-
-        
+        private void btn_ChonFileLichSu_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Filter = "Chon tap tin .xml|*.xml";
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                historyFilePath = dlg.FileName;
+                lbl_ChonFile.Text = Path.GetFileName(historyFilePath);
+                
+            }
+        }
 
         private void btn_QuayLai_Click(object sender, EventArgs e)
         {

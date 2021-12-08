@@ -31,6 +31,12 @@ namespace ModuleSoanDe
             lstTxtDapAn.Add(txt_DapAn3);
             lstTxtDapAn.Add(txt_DapAn4);
 
+            //lbl
+            lstLabelDapAn.Add(lbl_DapAn1);
+            lstLabelDapAn.Add(lbl_DapAn2);
+            lstLabelDapAn.Add(lbl_DapAn3);
+            lstLabelDapAn.Add(lbl_DapAn4);
+
             UpdateComboBoxTrueAnswer();
             //field
             cbx_QuestionField.Items.Add("Phần mềm");
@@ -40,23 +46,44 @@ namespace ModuleSoanDe
             cbx_QuestionField.SelectedIndex = 0;
 
         }
-      
+     
+        private bool CheckValidFileQuestionBank(string filePath)
+        {
+            if (Path.GetExtension(filePath) != ".xml")
+            {
+                MessageBox.Show("File không đúng định dạng (phải là .xml)");
+                return false;
+            }
+            
+            using (XmlReader xml = XmlReader.Create(filePath))
+            {
+                if (xml.ReadToFollowing("questions"))
+                    if (xml.MoveToAttribute("type"))
+                        if (xml.Value == "bank")
+                            return true;
+                MessageBox.Show("File không hợp lệ");
+                return false;
+            }
+        }
 
         private void btn_TaoCauHoi_Click(object sender, EventArgs e)
-        {
+        {         
             if (!CheckValidQuestion())
                 return;
             string questionField = cbx_QuestionField.SelectedItem.ToString();
             int indexTrueAnswer = cbx_DapAnDung.SelectedIndex;
-
+            
             if (!File.Exists(fileName))
             {
+                
                 using (XmlWriter xml = XmlWriter.Create(fileName, new XmlWriterSettings() { Indent = true }))
                 {
                     xml.WriteStartElement("questions");
                     xml.WriteStartElement("question");
+                    xml.WriteAttributeString("type","bank");
                     xml.WriteAttributeString("field", questionField);
                     xml.WriteAttributeString("answerCount", lstTxtDapAn.Count.ToString());
+                    
 
                     xml.WriteStartElement("content");
                     xml.WriteValue(txt_NoiDungCauHoi.Text);
@@ -82,6 +109,7 @@ namespace ModuleSoanDe
                 XElement question = new XElement("question",
                     new XAttribute("field", questionField),
                     new XAttribute("answerCount", lstTxtDapAn.Count.ToString()));
+
                 question.Add(new XElement("content", txt_NoiDungCauHoi.Text));
                 for (int i = 0; i < lstTxtDapAn.Count; i++)
                 {
@@ -91,7 +119,9 @@ namespace ModuleSoanDe
                 doc.Root.Add(question);
                 doc.Save(fileName, SaveOptions.None);
             }
+            MessageBox.Show("Thêm thành công !");
             ClearForm();
+            
         }
         private bool CheckValidQuestion()
         {
@@ -101,15 +131,20 @@ namespace ModuleSoanDe
                 return false;
             }
 
-            if (txt_DapAn1.Text == "" || txt_DapAn2.Text == "" || txt_DapAn3.Text == "" || txt_DapAn4.Text == "")
+            for (int i = 0; i < lstTxtDapAn.Count; i++)
             {
-                MessageBox.Show("Bạn điền thiếu đáp án");
+                if(lstTxtDapAn[i].Text=="")
+                {
+                    MessageBox.Show($"Bạn điền thiếu đáp án {i+1}");
+                    return false;
+                }         
             }
 
             return true;
         }
         private void UpdateComboBoxTrueAnswer()
         {
+            cbx_DapAnDung.Items.Clear();
             for (int i = 0; i < lstTxtDapAn.Count; i++)
             {
                 cbx_DapAnDung.Items.Add($"Đáp án {i + 1}");
@@ -123,33 +158,16 @@ namespace ModuleSoanDe
             {
                 dapAn.Text = "";
             }
-            cbx_DapAnDung.SelectedIndex = -1;
-            cbx_QuestionField.SelectedIndex = -1;
         }
-        private void ThemDapAn()
-        {
-            //Label
-            Label lblDapAn = new Label();
-            lblDapAn.Text = $"Đáp án {lstLabelDapAn.Count + 1}";
-            lblDapAn.Location = new Point(30, 170);
-            lstLabelDapAn.Add(lblDapAn);
-
-            //TextBox
-            TextBox txtDapAn = new TextBox();
-            txtDapAn.Location = new Point(lblDapAn.Location.X, lblDapAn.Location.Y + 30);
-
-            //Button thêm
-            //btn_ThemDapAn.Location = new Point(btn_ThemDapAn.Location.X, txtDapAn.Location.Y + 10);
-            Controls.Add(lblDapAn);
-            Controls.Add(txtDapAn);
-        }
-
+       
         private void btn_ChonFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.Filter = "Chon tap tin .xml|*.xml";
             if (dlg.ShowDialog() == DialogResult.OK)
             {
+                if (!CheckValidFileQuestionBank(dlg.FileName))
+                    return;
                 fileName = dlg.FileName;
                 lbl_FileName.Text = Path.GetFileName(fileName);
             }
@@ -158,6 +176,57 @@ namespace ModuleSoanDe
         private void btn_QuayLai_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btn_ThemDapAn_Click(object sender, EventArgs e)
+        {
+            if(lstLabelDapAn.Count==6)
+            {
+                MessageBox.Show($"Bạn chỉ được tạo tối đa 6 đáp án");
+                return;
+            }
+    
+            TextBox lastTxtDapAn= lstTxtDapAn[lstTxtDapAn.Count - 1];
+
+            Label lblDapAn = new Label();
+            lblDapAn.Text = $"Đáp án {lstLabelDapAn.Count + 1}";
+            lblDapAn.Location = new Point(lastTxtDapAn.Location.X, lastTxtDapAn.Location.Y + 30);
+            lstLabelDapAn.Add(lblDapAn);
+           
+            TextBox txtDapAn = new TextBox();
+            txtDapAn.Size = lastTxtDapAn.Size;
+            txtDapAn.Location = new Point(lblDapAn.Location.X, lblDapAn.Location.Y + 25);
+            lstTxtDapAn.Add(txtDapAn);
+
+            btn_BotDapAn.Location = new Point(btn_BotDapAn.Location.X, btn_BotDapAn.Location.Y + 30 + 25);
+            btn_ThemDapAn.Location = new Point(btn_ThemDapAn.Location.X, btn_ThemDapAn.Location.Y + 30 + 25);
+
+            
+            Controls.Add(lblDapAn);
+            Controls.Add(txtDapAn);
+
+            UpdateComboBoxTrueAnswer();
+
+        }
+
+        private void btn_BotDapAn_Click(object sender, EventArgs e)
+        {
+            if (lstLabelDapAn.Count == 2)
+            {
+                MessageBox.Show($"Câu hỏi trắc nghiệm phải có tối thiểu 2 đáp án");
+                return;
+            }
+            int lastIndex = lstLabelDapAn.Count-1;
+            
+
+            btn_BotDapAn.Location = new Point(btn_BotDapAn.Location.X, btn_BotDapAn.Location.Y - 30 - 25);
+            btn_ThemDapAn.Location = new Point(btn_ThemDapAn.Location.X, btn_ThemDapAn.Location.Y - 30 - 25);
+            Controls.Remove(lstLabelDapAn[lastIndex]);
+            Controls.Remove(lstTxtDapAn[lastIndex]);
+            lstLabelDapAn.RemoveAt(lastIndex);
+            lstTxtDapAn.RemoveAt(lastIndex);
+
+            UpdateComboBoxTrueAnswer();       
         }
     }
 }
