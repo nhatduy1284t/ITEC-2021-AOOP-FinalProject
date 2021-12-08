@@ -14,18 +14,14 @@ namespace ModuleSoanDe
 {
     public partial class frmChamBai : Form
     {
+        string historyFilePath;
+        List<Questions> lstQuestions = new List<Questions>();//Đáp án đề thi
+        List<Test> lstTest = new List<Test>();//Bài làm
         public frmChamBai()
         {
             InitializeComponent();
             Page_Load();
         }
-
-        string historyFilePath;
-        List<Questions> lstQuestions = new List<Questions>();//Đáp án đề thi
-        List<Test> lstTest = new List<Test>();//Bài làm
-
-       
-
         private void Page_Load()
         {
             this.Dock = DockStyle.Fill;
@@ -115,7 +111,6 @@ namespace ModuleSoanDe
                     lstQuestions.Add(qs);
                 }
             }
-
         }
 
         private void LoadListTest(string xmlFilePath)
@@ -226,10 +221,10 @@ namespace ModuleSoanDe
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                historyFilePath = dlg.FileName;
-                if (!CheckValidFileHistory(historyFilePath))
+                
+                if (!CheckValidFileHistory(dlg.FileName))
                     return;
-
+                historyFilePath = dlg.FileName;
                 lbl_ChonFileDapAn.Text = Path.GetFileName(historyFilePath);             
                 LoadListQuestions();//Load đáp án đề thi
             }

@@ -61,6 +61,7 @@ namespace ModuleSoanDe
                     if (xml.MoveToAttribute("type"))
                         if (xml.Value == "bank")
                             return true;
+                MessageBox.Show(xml.Value);
                 MessageBox.Show("File không hợp lệ");
                 return false;
             }

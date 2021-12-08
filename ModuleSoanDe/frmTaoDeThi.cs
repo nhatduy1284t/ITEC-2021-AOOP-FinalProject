@@ -36,8 +36,7 @@ namespace ModuleSoanDe
             SetMaximumValueNumberBox(lstCauHoi.Count);
         }
         private void LoadQuestionFromFileToList(string filePath)
-        {
-            
+        {    
             try
             {
                 lstCauHoi.Clear();
@@ -122,6 +121,40 @@ namespace ModuleSoanDe
                 lstViTriCauHoiTuChon.Add(index);
             }
         }
+        private bool CheckValidFileHistory(string filePath)
+        {
+            if (Path.GetExtension(filePath) != ".xml")
+            {
+                MessageBox.Show("File không hợp lệ");
+                return false;
+            }
+
+            using (XmlReader xml = XmlReader.Create(filePath))
+            {
+                if (xml.ReadToFollowing("history"))
+                    return true;
+                MessageBox.Show("File không đúng định dạng");
+                return false;
+            }
+        }
+        private bool CheckValidFileQuestionBank(string filePath)
+        {
+            if (Path.GetExtension(filePath) != ".xml")
+            {
+                MessageBox.Show("File không đúng định dạng (phải là .xml)");
+                return false;
+            }
+            using (XmlReader xml = XmlReader.Create(filePath))
+            {
+                if (xml.ReadToFollowing("questions"))
+                    if (xml.MoveToAttribute("type"))
+                        if (xml.Value == "bank")
+                            return true;
+                
+                MessageBox.Show("File không hợp lệ");
+                return false;
+            }
+        }
         private List<int> CreateRandomDistinctIndexList(int maxValue, int amount)
         {
             //create List containing random distinct value in [0 ;maxValue) with [amount] length
@@ -174,13 +207,17 @@ namespace ModuleSoanDe
                 //Chèn vào xml file
                 XElement questions = new XElement("questions",
                     new XAttribute("date", DateTime.Now.ToString("dd/MM/yyyy")),
-                    new XAttribute("code", txt_MaDe.Text),
-                    new XAttribute("questionCount", soLuongCauHoi));
+                    new XAttribute("code", txt_MaDe.Text)
+                    );
+                XAttribute attributeSoLuongCauHoi =new XAttribute("questionCount",0);
+                
                 
                 if (cbx_LuaChon.SelectedItem.ToString() == "Ngẫu nhiên")
                 {
+                    attributeSoLuongCauHoi.Value = soLuongCauHoi.ToString();
                     List<int> lstIndexRandom = CreateRandomDistinctIndexList(lstCauHoi.Count, soLuongCauHoi);
                     lstViTriCauHoiRandom = lstIndexRandom;
+
                     foreach (var randomIndex in lstViTriCauHoiRandom)
                     {
                         questions.Add(new XElement("question",
@@ -189,7 +226,8 @@ namespace ModuleSoanDe
                     }
                 }
                 else
-                {                
+                {
+                    attributeSoLuongCauHoi.Value = lstViTriCauHoiTuChon.Count.ToString();
                     foreach (var index in lstViTriCauHoiTuChon)
                     {
                         questions.Add(new XElement("question",
@@ -197,6 +235,8 @@ namespace ModuleSoanDe
                             new XElement("trueanswer", lstCauHoi[index].TrueAnswer)));
                     }
                 }
+
+                questions.Add(attributeSoLuongCauHoi);
                 doc.Root.Add(questions);
                 doc.Save(historyFilePath, SaveOptions.None);
             }
@@ -209,18 +249,35 @@ namespace ModuleSoanDe
                     xml.WriteAttributeString("code", txt_MaDe.Text);
                     xml.WriteAttributeString("questionCount", soLuongCauHoi.ToString());
 
-                    List<int> lstIndexRandom = CreateRandomDistinctIndexList(lstCauHoi.Count, soLuongCauHoi);
-                    lstViTriCauHoiRandom = lstIndexRandom;
-                    foreach (int randomIndex in lstIndexRandom)
+                    if (cbx_LuaChon.SelectedItem.ToString() == "Ngẫu nhiên")
                     {
-                        xml.WriteStartElement("question");
-                        xml.WriteStartElement("content");
-                        xml.WriteValue(lstCauHoi[randomIndex].Content);
-                        xml.WriteEndElement();
-                        xml.WriteStartElement("trueanswer");
-                        xml.WriteValue(lstCauHoi[randomIndex].TrueAnswer);
-                        xml.WriteEndElement();
-                        xml.WriteEndElement();
+                        List<int> lstIndexRandom = CreateRandomDistinctIndexList(lstCauHoi.Count, soLuongCauHoi);
+                        lstViTriCauHoiRandom = lstIndexRandom;
+                        foreach (int randomIndex in lstViTriCauHoiRandom)
+                        {
+                            xml.WriteStartElement("question");
+                            xml.WriteStartElement("content");
+                            xml.WriteValue(lstCauHoi[randomIndex].Content);
+                            xml.WriteEndElement();
+                            xml.WriteStartElement("trueanswer");
+                            xml.WriteValue(lstCauHoi[randomIndex].TrueAnswer);
+                            xml.WriteEndElement();
+                            xml.WriteEndElement();
+                        }
+                    }
+                    else
+                    {
+                        foreach (int index in lstViTriCauHoiTuChon)
+                        {
+                            xml.WriteStartElement("question");
+                            xml.WriteStartElement("content");
+                            xml.WriteValue(lstCauHoi[index].Content);
+                            xml.WriteEndElement();
+                            xml.WriteStartElement("trueanswer");
+                            xml.WriteValue(lstCauHoi[index].TrueAnswer);
+                            xml.WriteEndElement();
+                            xml.WriteEndElement();
+                        }
                     }
                     xml.WriteEndElement();
                     xml.WriteEndElement();
@@ -327,6 +384,8 @@ namespace ModuleSoanDe
             dlg.Filter = "Chon tap tin .xml|*.xml";
             if (dlg.ShowDialog() == DialogResult.OK)
             {
+                if (!CheckValidFileQuestionBank(dlg.FileName))
+                    return;
                 xmlQuestionFilePath = dlg.FileName;
                 lbl_ChonFile.Text = Path.GetFileName(xmlQuestionFilePath);
                 LoadQuestionFromFileToList(xmlQuestionFilePath);
@@ -340,8 +399,10 @@ namespace ModuleSoanDe
             dlg.Filter = "Chon tap tin .xml|*.xml";
             if (dlg.ShowDialog() == DialogResult.OK)
             {
+                if (!CheckValidFileHistory(dlg.FileName))
+                    return;
                 historyFilePath = dlg.FileName;
-                lbl_ChonFile.Text = Path.GetFileName(historyFilePath);
+                lbl_FileLichSu.Text = Path.GetFileName(historyFilePath);
                 
             }
         }
