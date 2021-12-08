@@ -14,5 +14,4 @@
 ## 4. Completion progress
 - Main functions - 100%
 - Extra :
-    - UX & UI : 70%
-    - Searching questions in questions bank: No
+    - Dynamically adding and removing answers when creating question
