@@ -160,7 +160,6 @@ namespace ModuleThiTracNghiem
             this.Controls.Add(this.label1);
             this.Name = "frmMain";
             this.Text = "Ứng dụng thi trắc nghiệm";
-            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -62,12 +62,9 @@ namespace ModuleThiTracNghiem
         }
         
         public void SetTimeCountDown(int seconds)
-        {
-            
+        {        
             ss = seconds % 60;
-            mm = seconds / 60;
-            //MessageBox.Show($"ss ne {ss} mm ne{mm}");
-            
+            mm = seconds / 60;           
             timer1.Enabled = true;
         }
         public void Start()

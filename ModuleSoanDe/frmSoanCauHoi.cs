@@ -25,13 +25,13 @@ namespace ModuleSoanDe
         }
         void Form_Load()
         {
-            ////textbox
+            //textbox
             lstTxtDapAn.Add(txt_DapAn1);
             lstTxtDapAn.Add(txt_DapAn2);
             lstTxtDapAn.Add(txt_DapAn3);
             lstTxtDapAn.Add(txt_DapAn4);
 
-            CapNhatDanhSachDapAnDung();
+            UpdateComboBoxTrueAnswer();
             //field
             cbx_QuestionField.Items.Add("Phần mềm");
             cbx_QuestionField.Items.Add("Phần cứng");
@@ -40,11 +40,7 @@ namespace ModuleSoanDe
             cbx_QuestionField.SelectedIndex = 0;
 
         }
-        public void SetSizeToParent()
-        {
-            //this.MaximumSize = new Size(Parent.MaximumSize.Width, Parent.MaximumSize.Height);
-            //this.Size = new Size(Parent.Size.Width, Parent.Size.Height);    
-        }
+      
 
         private void btn_TaoCauHoi_Click(object sender, EventArgs e)
         {
@@ -109,9 +105,10 @@ namespace ModuleSoanDe
             {
                 MessageBox.Show("Bạn điền thiếu đáp án");
             }
+
             return true;
         }
-        private void CapNhatDanhSachDapAnDung()
+        private void UpdateComboBoxTrueAnswer()
         {
             for (int i = 0; i < lstTxtDapAn.Count; i++)
             {
@@ -121,7 +118,6 @@ namespace ModuleSoanDe
         }
         private void ClearForm()
         {
-            //Clear form ngoại trừ nút Quay lại
             txt_NoiDungCauHoi.Text = "";
             foreach (var dapAn in lstTxtDapAn)
             {
@@ -143,7 +139,7 @@ namespace ModuleSoanDe
             txtDapAn.Location = new Point(lblDapAn.Location.X, lblDapAn.Location.Y + 30);
 
             //Button thêm
-            btn_ThemDapAn.Location = new Point(btn_ThemDapAn.Location.X, txtDapAn.Location.Y + 10);
+            //btn_ThemDapAn.Location = new Point(btn_ThemDapAn.Location.X, txtDapAn.Location.Y + 10);
             Controls.Add(lblDapAn);
             Controls.Add(txtDapAn);
         }

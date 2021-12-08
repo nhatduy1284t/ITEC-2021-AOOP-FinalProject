@@ -53,16 +53,13 @@ namespace ModuleThiTracNghiem
                     {
                         xml.ReadToFollowing("answer");
                         RadioButton rdAnswer = new RadioButton();
-                        rdAnswer.Text = xml.ReadElementContentAsString();
                         Label lblAnswer = new Label();
+                        rdAnswer.Text = xml.ReadElementContentAsString();                   
                         lblAnswer.Text = rdAnswer.Text;
-
                         qc.lblAnswers.Add(lblAnswer);
-
                         qc.rdAnswers.Add(rdAnswer);
                     }
-                    //Khi có radiobutton trong rdAnswers thì mới set được location
-
+                    //Khi có label trong lbAnswers thì mới set được location
                     qc.SetLocationLblAnswers();
                     questionControlList.Add(qc);
 

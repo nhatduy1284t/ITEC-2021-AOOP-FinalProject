@@ -36,7 +36,6 @@ namespace ModuleSoanDe
             this.txt_DapAn3 = new System.Windows.Forms.TextBox();
             this.txt_DapAn1 = new System.Windows.Forms.TextBox();
             this.txt_NoiDungCauHoi = new System.Windows.Forms.TextBox();
-            this.btn_ThemDapAn = new System.Windows.Forms.Button();
             this.cbx_DapAnDung = new System.Windows.Forms.ComboBox();
             this.cbx_QuestionField = new System.Windows.Forms.ComboBox();
             this.btn_TaoCauHoi = new System.Windows.Forms.Button();
@@ -49,12 +48,16 @@ namespace ModuleSoanDe
             this.label7 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_QuayLai = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnThemDapAn = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_ChonFile
             // 
             this.btn_ChonFile.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btn_ChonFile.Location = new System.Drawing.Point(393, 470);
+            this.btn_ChonFile.Location = new System.Drawing.Point(393, 99);
             this.btn_ChonFile.Name = "btn_ChonFile";
             this.btn_ChonFile.Size = new System.Drawing.Size(94, 29);
             this.btn_ChonFile.TabIndex = 25;
@@ -65,11 +68,11 @@ namespace ModuleSoanDe
             // lbl_FileName
             // 
             this.lbl_FileName.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.lbl_FileName.Location = new System.Drawing.Point(157, 476);
+            this.lbl_FileName.Location = new System.Drawing.Point(153, 101);
             this.lbl_FileName.Name = "lbl_FileName";
-            this.lbl_FileName.Size = new System.Drawing.Size(230, 23);
+            this.lbl_FileName.Size = new System.Drawing.Size(234, 27);
             this.lbl_FileName.TabIndex = 26;
-            this.lbl_FileName.Text = "fileName";
+            this.lbl_FileName.Text = "DanhSachCauHoi.xml(mặc định)";
             this.lbl_FileName.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txt_DapAn4
@@ -112,25 +115,12 @@ namespace ModuleSoanDe
             this.txt_NoiDungCauHoi.Size = new System.Drawing.Size(475, 27);
             this.txt_NoiDungCauHoi.TabIndex = 28;
             // 
-            // btn_ThemDapAn
-            // 
-            this.btn_ThemDapAn.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btn_ThemDapAn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btn_ThemDapAn.Location = new System.Drawing.Point(417, 376);
-            this.btn_ThemDapAn.Name = "btn_ThemDapAn";
-            this.btn_ThemDapAn.Size = new System.Drawing.Size(70, 29);
-            this.btn_ThemDapAn.TabIndex = 41;
-            this.btn_ThemDapAn.TabStop = false;
-            this.btn_ThemDapAn.Text = "Thêm";
-            this.btn_ThemDapAn.UseVisualStyleBackColor = true;
-            this.btn_ThemDapAn.Visible = false;
-            // 
             // cbx_DapAnDung
             // 
             this.cbx_DapAnDung.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.cbx_DapAnDung.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbx_DapAnDung.FormattingEnabled = true;
-            this.cbx_DapAnDung.Location = new System.Drawing.Point(12, 415);
+            this.cbx_DapAnDung.Location = new System.Drawing.Point(12, 44);
             this.cbx_DapAnDung.Name = "cbx_DapAnDung";
             this.cbx_DapAnDung.Size = new System.Drawing.Size(135, 28);
             this.cbx_DapAnDung.TabIndex = 40;
@@ -140,7 +130,7 @@ namespace ModuleSoanDe
             this.cbx_QuestionField.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.cbx_QuestionField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbx_QuestionField.FormattingEnabled = true;
-            this.cbx_QuestionField.Location = new System.Drawing.Point(12, 475);
+            this.cbx_QuestionField.Location = new System.Drawing.Point(12, 104);
             this.cbx_QuestionField.Name = "cbx_QuestionField";
             this.cbx_QuestionField.Size = new System.Drawing.Size(135, 28);
             this.cbx_QuestionField.TabIndex = 42;
@@ -149,7 +139,7 @@ namespace ModuleSoanDe
             // 
             this.btn_TaoCauHoi.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btn_TaoCauHoi.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btn_TaoCauHoi.Location = new System.Drawing.Point(12, 525);
+            this.btn_TaoCauHoi.Location = new System.Drawing.Point(12, 154);
             this.btn_TaoCauHoi.Name = "btn_TaoCauHoi";
             this.btn_TaoCauHoi.Size = new System.Drawing.Size(475, 45);
             this.btn_TaoCauHoi.TabIndex = 43;
@@ -215,7 +205,7 @@ namespace ModuleSoanDe
             this.label8.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label8.AutoSize = true;
             this.label8.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label8.Location = new System.Drawing.Point(12, 392);
+            this.label8.Location = new System.Drawing.Point(12, 21);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(95, 20);
             this.label8.TabIndex = 31;
@@ -226,7 +216,7 @@ namespace ModuleSoanDe
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label7.AutoSize = true;
             this.label7.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label7.Location = new System.Drawing.Point(12, 452);
+            this.label7.Location = new System.Drawing.Point(12, 81);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(89, 20);
             this.label7.TabIndex = 34;
@@ -254,33 +244,62 @@ namespace ModuleSoanDe
             this.btn_QuayLai.UseVisualStyleBackColor = true;
             this.btn_QuayLai.Click += new System.EventHandler(this.btn_QuayLai_Click);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.label8);
+            this.panel1.Controls.Add(this.label7);
+            this.panel1.Controls.Add(this.btn_ChonFile);
+            this.panel1.Controls.Add(this.btn_TaoCauHoi);
+            this.panel1.Controls.Add(this.lbl_FileName);
+            this.panel1.Controls.Add(this.cbx_QuestionField);
+            this.panel1.Controls.Add(this.cbx_DapAnDung);
+            this.panel1.Location = new System.Drawing.Point(0, 407);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(501, 216);
+            this.panel1.TabIndex = 45;
+            // 
+            // btnThemDapAn
+            // 
+            this.btnThemDapAn.Location = new System.Drawing.Point(427, 376);
+            this.btnThemDapAn.Name = "btnThemDapAn";
+            this.btnThemDapAn.Size = new System.Drawing.Size(59, 29);
+            this.btnThemDapAn.TabIndex = 46;
+            this.btnThemDapAn.Text = "button1";
+            this.btnThemDapAn.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(340, 376);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(65, 29);
+            this.button2.TabIndex = 47;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // frmSoanCauHoi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(498, 582);
+            this.ClientSize = new System.Drawing.Size(498, 798);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnThemDapAn);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.btn_QuayLai);
-            this.Controls.Add(this.btn_ChonFile);
-            this.Controls.Add(this.lbl_FileName);
             this.Controls.Add(this.txt_DapAn4);
             this.Controls.Add(this.txt_DapAn2);
             this.Controls.Add(this.txt_DapAn3);
             this.Controls.Add(this.txt_DapAn1);
             this.Controls.Add(this.txt_NoiDungCauHoi);
-            this.Controls.Add(this.btn_ThemDapAn);
-            this.Controls.Add(this.cbx_DapAnDung);
-            this.Controls.Add(this.cbx_QuestionField);
-            this.Controls.Add(this.btn_TaoCauHoi);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.label1);
             this.Name = "frmSoanCauHoi";
             this.Text = "frmSoanCauHoi";
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -295,7 +314,6 @@ namespace ModuleSoanDe
         private System.Windows.Forms.TextBox txt_DapAn3;
         private System.Windows.Forms.TextBox txt_DapAn1;
         private System.Windows.Forms.TextBox txt_NoiDungCauHoi;
-        private System.Windows.Forms.Button btn_ThemDapAn;
         private System.Windows.Forms.ComboBox cbx_DapAnDung;
         private System.Windows.Forms.ComboBox cbx_QuestionField;
         private System.Windows.Forms.Button btn_TaoCauHoi;
@@ -308,5 +326,8 @@ namespace ModuleSoanDe
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btn_QuayLai;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnThemDapAn;
+        private System.Windows.Forms.Button button2;
     }
 }

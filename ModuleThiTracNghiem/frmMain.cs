@@ -83,12 +83,6 @@ namespace ModuleThiTracNghiem
                 DisplayPage(Page.LAM_BAI);         
         }
 
-        private void Form1_Resize(object sender, EventArgs e)
-        {
-
-            //Controls[0].MaximumSize = Controls[0].Parent.MaximumSize;
-            //Controls[0].Size = new Size(Controls[0].Parent.Size.Width-30, this.Size.Height-30);
-            
-        }
+       
     }
 }

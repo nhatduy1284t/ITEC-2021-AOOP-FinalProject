@@ -13,27 +13,13 @@ namespace ModuleSoanDe
     
     public partial class frmMain : Form
     {
-        List<Control> menuControls = new List<Control>();
         public frmMain()
         {     
             InitializeComponent();
-            foreach (Control c in Controls)
-            {
-                menuControls.Add(c);
-            }   
         }
 
-        private void btn_SoanCauHoi_Click(object sender, EventArgs e)
-        {
-            DisplayPage(Page.SOAN_CAU_HOI);
-        }
-        private void btn_TaoBaiThi_Click(object sender, EventArgs e)
-        {
-            DisplayPage(Page.TAO_DE_THI);
-        }
         private void DisplayPage(string page)
         {
-
             switch (page)
             {
                 case Page.SOAN_CAU_HOI:
@@ -44,25 +30,15 @@ namespace ModuleSoanDe
                     break;
                 case Page.TAO_DE_THI:
                     {
-                        this.Visible = false;
-                        frmTaoDeThi f = new frmTaoDeThi();
-                        f.StartPosition = FormStartPosition.CenterScreen;
-                        f.ShowDialog();
-                        this.Visible = true;
+                        DisplayForm(new frmTaoDeThi());
                     }
                     break;
                 case Page.CHAM_BAI:
                     {
-                        this.Hide();
-                        frmChamBai f = new frmChamBai();
-                        f.StartPosition = FormStartPosition.CenterScreen;
-                        f.ShowDialog();                    
-                        this.Show();
+                        DisplayForm(new frmChamBai());
                     }
                     break;           
             }
-
-
         }
         private void DisplayForm(Form f)
         {
@@ -76,8 +52,14 @@ namespace ModuleSoanDe
         {
             DisplayPage(Page.CHAM_BAI);
         }
-        
-      
-    
+
+        private void btn_SoanCauHoi_Click(object sender, EventArgs e)
+        {
+            DisplayPage(Page.SOAN_CAU_HOI);
+        }
+        private void btn_TaoBaiThi_Click(object sender, EventArgs e)
+        {
+            DisplayPage(Page.TAO_DE_THI);
+        }
     }
 }
