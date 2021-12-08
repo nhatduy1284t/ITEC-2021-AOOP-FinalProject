@@ -35,6 +35,7 @@ namespace ModuleSoanDe
             this.btn_ChonFileDapAn = new System.Windows.Forms.Button();
             this.btn_DocFileBaiLam = new System.Windows.Forms.Button();
             this.lbl_ChonFileDapAn = new System.Windows.Forms.Label();
+            this.btn_QuayLai = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_ChamBai
@@ -103,11 +104,22 @@ namespace ModuleSoanDe
             this.lbl_ChonFileDapAn.TabIndex = 16;
             this.lbl_ChonFileDapAn.Text = "        ";
             // 
+            // btn_QuayLai
+            // 
+            this.btn_QuayLai.Location = new System.Drawing.Point(13, 13);
+            this.btn_QuayLai.Name = "btn_QuayLai";
+            this.btn_QuayLai.Size = new System.Drawing.Size(94, 29);
+            this.btn_QuayLai.TabIndex = 17;
+            this.btn_QuayLai.Text = "Quay lại";
+            this.btn_QuayLai.UseVisualStyleBackColor = true;
+            this.btn_QuayLai.Click += new System.EventHandler(this.btn_QuayLai_Click);
+            // 
             // frmChamBai
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(516, 530);
+            this.Controls.Add(this.btn_QuayLai);
             this.Controls.Add(this.lbl_ChonFileDapAn);
             this.Controls.Add(this.btn_ChonFileDapAn);
             this.Controls.Add(this.btn_DocFileBaiLam);
@@ -128,5 +140,6 @@ namespace ModuleSoanDe
         private System.Windows.Forms.Button btn_ChonFileDapAn;
         private System.Windows.Forms.Button btn_DocFileBaiLam;
         private System.Windows.Forms.Label lbl_ChonFileDapAn;
+        private System.Windows.Forms.Button btn_QuayLai;
     }
 }

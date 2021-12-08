@@ -44,6 +44,7 @@ namespace ModuleSoanDe
         {
             this.Visible = false;
             f.StartPosition = FormStartPosition.CenterParent;
+            f.WindowState = this.WindowState;
             f.ShowDialog();
             this.Visible = true;
         }

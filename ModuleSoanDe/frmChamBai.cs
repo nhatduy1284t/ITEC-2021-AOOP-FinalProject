@@ -234,5 +234,10 @@ namespace ModuleSoanDe
                 LoadListQuestions();//Load đáp án đề thi
             }
         }
+
+        private void btn_QuayLai_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
