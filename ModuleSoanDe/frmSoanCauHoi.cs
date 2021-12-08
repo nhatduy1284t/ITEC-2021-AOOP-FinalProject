@@ -54,14 +54,12 @@ namespace ModuleSoanDe
                 MessageBox.Show("File không đúng định dạng (phải là .xml)");
                 return false;
             }
-            
             using (XmlReader xml = XmlReader.Create(filePath))
             {
                 if (xml.ReadToFollowing("questions"))
                     if (xml.MoveToAttribute("type"))
                         if (xml.Value == "bank")
                             return true;
-                MessageBox.Show(xml.Value);
                 MessageBox.Show("File không hợp lệ");
                 return false;
             }
@@ -80,8 +78,8 @@ namespace ModuleSoanDe
                 using (XmlWriter xml = XmlWriter.Create(fileName, new XmlWriterSettings() { Indent = true }))
                 {
                     xml.WriteStartElement("questions");
-                    xml.WriteStartElement("question");
-                    xml.WriteAttributeString("type","bank");
+                    xml.WriteAttributeString("type", "bank");
+                    xml.WriteStartElement("question");                
                     xml.WriteAttributeString("field", questionField);
                     xml.WriteAttributeString("answerCount", lstTxtDapAn.Count.ToString());
                     

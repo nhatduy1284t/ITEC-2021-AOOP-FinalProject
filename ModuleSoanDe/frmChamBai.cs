@@ -116,7 +116,7 @@ namespace ModuleSoanDe
         private void LoadListTest(string xmlFilePath)
         {
             //Load file bài làm và đưa vào list test
-            lstTest.Clear();
+            
             using (XmlReader xml = XmlReader.Create(xmlFilePath))
             {
                 Test t = new Test();
@@ -136,7 +136,6 @@ namespace ModuleSoanDe
                     t.lstAnswer.Add(answer);
                 }
                 lstTest.Add(t);
-
             }
         }
         private void MarkTest()
@@ -170,6 +169,7 @@ namespace ModuleSoanDe
             {
                 foreach (string file in dlg.FileNames)
                 {
+                    
                     if (!CheckValidSubmittedFileTest(file))
                         return;
                     if (lbx_Test.Items.Contains(Path.GetFileName(file)))
