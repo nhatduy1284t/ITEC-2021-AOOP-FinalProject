@@ -84,7 +84,6 @@ namespace ModuleSoanDe
         }
         private void LoadListQuestions()
         {
-            lstQuestions.Clear();
             using (XmlReader xml = XmlReader.Create(historyFilePath))
             {
                 xml.ReadToFollowing("history");
